@@ -1,54 +1,44 @@
-# React + TypeScript + Vite
+# Join By Phone Example
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains a simple example of how to prompt a user to `join-by-phone` in an Azure Communication Services call. The sample uses `@azure/communication-react` to display a `CallComposite`, and when the user joins the call if there are no microphones available, displays a prompt to join by phone instead.
 
-Currently, two official plugins are available:
+## Run Locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Setup
 
-## Expanding the ESLint configuration
+1. Clone the repository
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   ```bash
+   git clone
+   cd join-by-phone-example
+   ```
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Install dependencies
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+   ```bash
+   npm install
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Create a `.env` file in the root of the project and add the following variables:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+   ```bash
+   VITE_TEST_USER_ID=<USER_ID_STRING>
+   VITE_TEST_USER_TOKEN=<USER_TOKEN>
+   VITE_TEST_MEETING_LINK=<TEAMS_MEETING_LINK>
+   ```
+
+   Replace `<USER_ID_STRING>`, `USER_TOKEN` and `<TEAMS_MEETING_LINK>` with local values. You can generate `<USER_ID_STRING>` and `USER_TOKEN` values for testing in the Azure portal, under your `Communication Services` resource > `Identities & User Access Tokens`. In a production application, you would generate these values on your backend server and fetch them in your client application with a `fetch` call. `TEAMS_MEETING_LINK` should be a valid link to a Teams meeting. You can create a Teams meeting in your Teams client and copy the link from there.
+
+### Run
+
+1. Start the development server
+
+   ```bash
+   npm run dev
+   ```
+
+1. Open your browser and navigate to `http://localhost:5173/`.
+
+## Notes
+
+This project was bootstrapped with vite via `npm create vite@latest --template react-ts`.
