@@ -2,6 +2,8 @@
 
 This repository contains a simple example of how to prompt a user to `join-by-phone` in an Azure Communication Services call. The sample uses `@azure/communication-react` to display a `CallComposite`, and when the user joins the call if there are no microphones available, displays a prompt to join by phone instead.
 
+https://github.com/user-attachments/assets/e1ba5101-6bdf-48ee-9531-e91b4c00cad0
+
 ## Run Locally
 
 ### Setup
