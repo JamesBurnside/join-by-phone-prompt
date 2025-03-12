@@ -3,6 +3,7 @@ import {
   CallAdapter,
   CallAdapterState,
   CallComposite,
+  CallCompositeOptions,
   ConferencePhoneInfo,
   createAzureCommunicationCallAdapter,
 } from "@azure/communication-react";
@@ -52,9 +53,7 @@ function App() {
       }
 
       callConnectionState.current = state.call?.state;
-      setJoinByPhoneDetails(
-        state.call?.meetingConference?.conferencePhones
-      );
+      setJoinByPhoneDetails(state.call?.meetingConference?.conferencePhones);
     };
 
     const createAdapterAsync = async (): Promise<CallAdapter | undefined> => {
@@ -78,6 +77,12 @@ function App() {
     };
   }, []);
 
+  const callCompositeOptions: CallCompositeOptions = {
+    joinCallOptions: {
+      microphoneCheck: "skip",
+    },
+  };
+
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
       {!adapter && !error && (
@@ -94,7 +99,9 @@ function App() {
           }}
         />
       )}
-      {adapter && <CallComposite adapter={adapter} />}
+      {adapter && (
+        <CallComposite adapter={adapter} options={callCompositeOptions} />
+      )}
       {error && <p>{error}</p>}
       <JoinByPhoneModal
         showModal={showJoinByPhonePrompt}
@@ -115,7 +122,7 @@ const createAdapter = async (): Promise<CallAdapter> => {
     displayName: "Test user",
     credential: new AzureCommunicationTokenCredential(USER_TOKEN),
     locator: {
-      meetingLink: MEETING_LINK
+      meetingLink: MEETING_LINK,
     },
   });
 };
